@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: MailingService
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOST:127.0.0.1}:${POSTGRESQL_PORT:5432}/${POSTGRESQL_DATABASE:main}
+    username: ${POSTGRESQL_USERNAME:root}
+    password: ${POSTGRESQL_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
