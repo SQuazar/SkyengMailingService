@@ -18,6 +18,9 @@ public class MailingStatus {
     @Id
     private Mailing mailing;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     enum Status {
         REGISTERED("Зарегистрировано"),
         ROUTING("В пути"),
