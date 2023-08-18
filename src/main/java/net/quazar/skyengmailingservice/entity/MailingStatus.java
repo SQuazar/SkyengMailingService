@@ -21,7 +21,7 @@ public class MailingStatus {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    enum Status {
+    public enum Status {
         REGISTERED("Зарегистрировано"),
         ROUTING("В пути"),
         RECEIVED("Получено");

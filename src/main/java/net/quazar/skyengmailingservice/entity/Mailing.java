@@ -32,7 +32,7 @@ public class Mailing {
     @Column(nullable = false)
     private String receiverName;
 
-    enum Type {
+    public enum Type {
         MESSAGE("Письмо"),
         PACKAGE("Посылка"),
         PARCEL("Бандероль"),
