@@ -28,7 +28,7 @@ public class MailingHistory {
     @JoinColumn(name = "mailing_id")
     private Mailing mailing;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "postal_office_id")
     private PostalOffice postalOffice;
 
