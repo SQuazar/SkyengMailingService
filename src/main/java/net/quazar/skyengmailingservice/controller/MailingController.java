@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import net.quazar.skyengmailingservice.entity.Mailing;
 import net.quazar.skyengmailingservice.entity.MailingStatus;
@@ -46,7 +45,6 @@ public class MailingController {
     }
 
     @Data
-    @Builder
     static final class RegisterMailingRequest {
         @JsonProperty("mailing_type")
         @NotNull(message = "mailing_type cannot be null or empty")
