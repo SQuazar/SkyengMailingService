@@ -14,6 +14,6 @@ public class MailingHistoryNodeDto {
     @JsonProperty("mailing_id")
     private int mailingId;
     @JsonProperty("postal_office_id")
-    private int postalOfficeId;
+    private int postalOfficeIndex;
     private String operation;
 }
