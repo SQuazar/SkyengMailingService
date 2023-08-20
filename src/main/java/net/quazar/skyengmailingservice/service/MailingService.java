@@ -5,7 +5,7 @@ import net.quazar.skyengmailingservice.entity.MailingStatus;
 import net.quazar.skyengmailingservice.entity.dto.MailingDto;
 import net.quazar.skyengmailingservice.entity.dto.MailingHistoryNodeDto;
 
-import java.util.Set;
+import java.util.List;
 
 public interface MailingService {
     MailingDto getMailingById(int mailingId);
@@ -16,5 +16,5 @@ public interface MailingService {
 
     String getMailingStatus(int mailingId);
 
-    Set<MailingHistoryNodeDto> getMailingHistory(int mailingId);
+    List<MailingHistoryNodeDto> getMailingHistory(int mailingId);
 }
