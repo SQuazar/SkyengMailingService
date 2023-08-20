@@ -1,5 +1,6 @@
 package net.quazar.skyengmailingservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,15 +24,16 @@ public class Mailing {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @Column(nullable = false)
+    @Column(name = "receiver_index", nullable = false)
     private String receiverIndex;
 
-    @Column(nullable = false)
+    @Column(name = "receiver_address", nullable = false)
     private String receiverAddress;
 
-    @Column(nullable = false)
+    @Column(name = "receiver_name", nullable = false)
     private String receiverName;
 
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     public enum Type {
         MESSAGE("Письмо"),
         PACKAGE("Посылка"),
