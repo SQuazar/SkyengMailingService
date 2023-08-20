@@ -40,6 +40,13 @@ public class PostalOfficeServiceImpl implements PostalOfficeService {
     }
 
     @Override
+    public PostalOfficeDto findByIndex(String index) {
+        PostalOffice postalOffice = postalOfficeRepository.findById(index)
+                .orElseThrow(() -> new PostalOfficeNotFoundException(String.format("Почтовое отделение по индексу %s не найдено", index)));
+        return postalOfficeMapper.postalOfficeToDto(postalOffice);
+    }
+
+    @Override
     public PostalOfficeDto createPostalOffice(String index, String address, String name) {
         if (postalOfficeRepository.findById(index).isPresent())
             throw new PostalOfficeAlreadyExistsException(String.format("Почтовое отделение по индексу %s уже зарегистрировано", index));

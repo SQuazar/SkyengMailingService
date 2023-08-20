@@ -8,6 +8,8 @@ import java.util.Set;
 public interface PostalOfficeService {
     Set<PostalOfficeDto> findAll();
 
+    PostalOfficeDto findByIndex(String index);
+
     PostalOfficeDto createPostalOffice(String index, String address, String name);
 
     void registerIncomingMailing(String postalOfficeIndex, int mailingId);
