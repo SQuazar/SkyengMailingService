@@ -18,10 +18,11 @@ import java.time.LocalDateTime;
         @Index(name = "mailing_id_index", columnList = "mailing_id")
     })
 public class MailingHistory {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
 
-    @Column(columnDefinition = "TIMESTAMP", nullable = false)
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE", nullable = false)
     private LocalDateTime date;
 
     @ManyToOne(optional = false)
