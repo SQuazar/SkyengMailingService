@@ -13,9 +13,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mailing_status")
 public class MailingStatus {
-    @ManyToOne
-    @Column(name = "mailing_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "mailing_id")
     private Mailing mailing;
 
     @Enumerated(EnumType.STRING)
