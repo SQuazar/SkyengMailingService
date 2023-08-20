@@ -66,10 +66,11 @@ public class PostalOfficeServiceImpl implements PostalOfficeService {
         Mailing mailing = mailingRepository.findById(mailingId)
                 .orElseThrow(() -> new MailingNotFoundException(String.format("Почтовое отправление %d не найдено", mailingId)));
 
-        mailingStatusRepository.save(MailingStatus.builder()
-                .mailing(mailing)
-                .status(MailingStatus.Status.ROUTING)
-                .build());
+        MailingStatus mailingStatus = mailingStatusRepository.findByMailingId(mailingId)
+                .orElseThrow(() -> new MailingNotFoundException("Не удалось определить статус почтового отправления"));
+        mailingStatus.setStatus(MailingStatus.Status.ROUTING);
+        mailingStatusRepository.save(mailingStatus);
+
         MailingHistory mailingHistory = MailingHistory.builder()
                 .mailing(mailing)
                 .postalOffice(postalOffice)
@@ -89,10 +90,11 @@ public class PostalOfficeServiceImpl implements PostalOfficeService {
         Mailing mailing = mailingRepository.findById(mailingId)
                 .orElseThrow(() -> new MailingNotFoundException(String.format("Почтовое отправление %d не найдено", mailingId)));
 
-        mailingStatusRepository.save(MailingStatus.builder()
-                .mailing(mailing)
-                .status(MailingStatus.Status.ROUTING)
-                .build());
+        MailingStatus mailingStatus = mailingStatusRepository.findByMailingId(mailingId)
+                .orElseThrow(() -> new MailingNotFoundException("Не удалось определить статус почтового отправления"));
+        mailingStatus.setStatus(MailingStatus.Status.ROUTING);
+        mailingStatusRepository.save(mailingStatus);
+
         MailingHistory mailingHistory = MailingHistory.builder()
                 .mailing(mailing)
                 .postalOffice(postalOffice)
