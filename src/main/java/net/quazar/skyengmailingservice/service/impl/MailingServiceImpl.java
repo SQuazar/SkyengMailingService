@@ -14,10 +14,11 @@ import net.quazar.skyengmailingservice.repository.MailingStatusRepository;
 import net.quazar.skyengmailingservice.service.MailingService;
 import net.quazar.skyengmailingservice.util.MailingDtoMapper;
 import net.quazar.skyengmailingservice.util.MailingHistoryDtoMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,7 +37,7 @@ public class MailingServiceImpl implements MailingService {
                 .map(mailingMapper::mailingToDto)
                 .orElseThrow(() -> new MailingNotFoundException("Почтовое отправление не найдено"));
 
-        MailingStatus.Status status = mailingStatusRepository.findById(mailingId)
+        MailingStatus.Status status = mailingStatusRepository.findByMailingId(mailingId)
                 .map(MailingStatus::getStatus)
                 .orElseThrow(() -> new MailingNotFoundException("Не удалось определить статус почтового отправления"));
         dto.setStatus(status.getLocalized());
@@ -73,26 +74,35 @@ public class MailingServiceImpl implements MailingService {
 
     @Override
     public void changeMailingStatus(int mailingId, MailingStatus.Status status) {
-        MailingStatus mailingStatus = mailingStatusRepository.findById(mailingId)
+        Mailing mailing = mailingRepository.findById(mailingId)
+                .orElseThrow(() -> new MailingNotFoundException("Почтовое отправление не найдено"));
+        MailingStatus mailingStatus = mailingStatusRepository.findByMailingId(mailingId)
                 .orElseThrow(() -> new MailingNotFoundException("Запись о статусе почтового отправления не найдена"));
         mailingStatus.setStatus(status);
+
+        mailingHistoryRepository.save(MailingHistory.builder()
+                .date(LocalDateTime.now())
+                .operation(String.format("Статус почтового отправления изменён на \"%s\"", status.getLocalized()))
+                .mailing(mailing)
+                .build());
+
         mailingStatusRepository.save(mailingStatus);
     }
 
     @Override
     public String getMailingStatus(int mailingId) {
-        MailingStatus mailingStatus = mailingStatusRepository.findById(mailingId)
+        MailingStatus mailingStatus = mailingStatusRepository.findByMailingId(mailingId)
                 .orElseThrow(() -> new MailingNotFoundException("Запись о статусе почтового отправления не найдена"));
         return mailingStatus.getStatus().getLocalized();
     }
 
     @Override
-    public Set<MailingHistoryNodeDto> getMailingHistory(int mailingId) {
+    public List<MailingHistoryNodeDto> getMailingHistory(int mailingId) {
         Mailing mailing = mailingRepository.findById(mailingId)
                 .orElseThrow(() -> new MailingNotFoundException("Почтовое отправление не найдено"));
-        return mailingHistoryRepository.findAllByMailing(mailing)
+        return mailingHistoryRepository.findAllByMailing(mailing, Sort.by(Sort.Direction.DESC, "date"))
                 .stream()
                 .map(historyMapper::mailingHistoryToDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }
