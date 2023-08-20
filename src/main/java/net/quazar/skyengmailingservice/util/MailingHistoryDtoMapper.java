@@ -11,6 +11,6 @@ public interface MailingHistoryDtoMapper {
     MailingHistoryDtoMapper INSTANCE = Mappers.getMapper(MailingHistoryDtoMapper.class);
 
     @Mapping(target = "mailingId", source = "mailing.id")
-    @Mapping(target = "postalOfficeId", source = "postalOffice.id")
+    @Mapping(target = "postalOfficeIndex", source = "postalOffice.index")
     MailingHistoryNodeDto mailingHistoryToDto(MailingHistory mailingHistory);
 }
