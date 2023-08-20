@@ -18,6 +18,8 @@ import net.quazar.skyengmailingservice.util.PostalOfficeDtoMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +30,14 @@ public class PostalOfficeServiceImpl implements PostalOfficeService {
     private final MailingHistoryRepository mailingHistoryRepository;
 
     private final PostalOfficeDtoMapper postalOfficeMapper = PostalOfficeDtoMapper.INSTANCE;
+
+    @Override
+    public Set<PostalOfficeDto> findAll() {
+        return postalOfficeRepository.findAll()
+                .stream()
+                .map(postalOfficeMapper::postalOfficeToDto)
+                .collect(Collectors.toSet());
+    }
 
     @Override
     public PostalOfficeDto createPostalOffice(String index, String address, String name) {
