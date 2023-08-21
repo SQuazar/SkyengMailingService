@@ -1,8 +1,7 @@
 package net.quazar.skyengmailingservice.controller;
 
 
-import lombok.Builder;
-import lombok.Data;
+import net.quazar.skyengmailingservice.controller.model.ServerError;
 import net.quazar.skyengmailingservice.exception.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,12 +43,5 @@ public class ServiceExceptionController {
                         .message(message)
                         .build()
                 );
-    }
-
-    @Data
-    @Builder
-    public static final class ServerError {
-        private final int code;
-        private final String message;
     }
 }
