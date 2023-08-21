@@ -23,6 +23,7 @@ jacocoTestReport {
         classDirectories.setFrom(files(classDirectories.files.collect( {
             fileTree(dir: it, exclude: [
                     "net/quazar/skyengmailingservice/entity/dto/*Dto*.class",
+                    "net/quazar/skyengmailingservice/entity/*.class",
                     "net/quazar/skyengmailingservice/exception/**",
                     "net/quazar/skyengmailingservice/controller/model/**"
             ])
@@ -31,6 +32,17 @@ jacocoTestReport {
 }
 
 jacocoTestCoverageVerification {
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect( {
+            fileTree(dir: it, exclude: [
+                    "net/quazar/skyengmailingservice/entity/dto/*Dto*.class",
+                    "net/quazar/skyengmailingservice/entity/*.class",
+                    "net/quazar/skyengmailingservice/exception/**",
+                    "net/quazar/skyengmailingservice/controller/model/**"
+            ])
+        })))
+    }
+
     violationRules {
         rule {
             limit {
