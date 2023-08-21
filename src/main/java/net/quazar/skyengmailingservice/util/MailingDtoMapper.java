@@ -11,5 +11,6 @@ public interface MailingDtoMapper {
     MailingDtoMapper INSTANCE = Mappers.getMapper(MailingDtoMapper.class);
 
     @Mapping(target = "type", source = "type.localized")
+    @Mapping(target = "status", ignore = true)
     MailingDto mailingToDto(Mailing mailing);
 }
