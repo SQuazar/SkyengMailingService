@@ -90,13 +90,6 @@ public class MailingServiceImpl implements MailingService {
     }
 
     @Override
-    public String getMailingStatus(int mailingId) {
-        MailingStatus mailingStatus = mailingStatusRepository.findByMailingId(mailingId)
-                .orElseThrow(() -> new MailingNotFoundException("Запись о статусе почтового отправления не найдена"));
-        return mailingStatus.getStatus().getLocalized();
-    }
-
-    @Override
     public List<MailingHistoryNodeDto> getMailingHistory(int mailingId) {
         Mailing mailing = mailingRepository.findById(mailingId)
                 .orElseThrow(() -> new MailingNotFoundException("Почтовое отправление не найдено"));

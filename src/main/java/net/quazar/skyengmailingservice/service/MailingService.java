@@ -14,7 +14,5 @@ public interface MailingService {
 
     void changeMailingStatus(int mailingId, MailingStatus.Status status);
 
-    String getMailingStatus(int mailingId);
-
     List<MailingHistoryNodeDto> getMailingHistory(int mailingId);
 }
