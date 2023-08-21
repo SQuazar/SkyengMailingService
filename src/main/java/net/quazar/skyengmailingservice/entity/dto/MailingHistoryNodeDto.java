@@ -13,7 +13,7 @@ public class MailingHistoryNodeDto {
     private LocalDateTime date;
     @JsonProperty("mailing_id")
     private int mailingId;
-    @JsonProperty("postal_office_id")
-    private int postalOfficeIndex;
+    @JsonProperty("postal_office_index")
+    private String postalOfficeIndex;
     private String operation;
 }
