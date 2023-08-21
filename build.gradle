@@ -19,6 +19,15 @@ test {
 
 jacocoTestReport {
     dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect( {
+            fileTree(dir: it, exclude: [
+                    "net/quazar/skyengmailingservice/entity/dto/*Dto*.class",
+                    "net/quazar/skyengmailingservice/exception/**",
+                    "net/quazar/skyengmailingservice/controller/model/**"
+            ])
+        })))
+    }
 }
 
 jacocoTestCoverageVerification {
