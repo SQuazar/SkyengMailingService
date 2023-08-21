@@ -1,6 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5433/mailing_test
+    username: mailing_test_user
+    password: test
   jpa:
     hibernate:
       ddl-auto: create-drop
